@@ -1,0 +1,29 @@
+// Representative GenExpr call forms, written for this project's compatibility checks.
+require("helpers");
+
+shape(input, drive=1) {
+    History previous(0);
+    output = tanh(input * drive);
+    previous = output;
+    return output;
+}
+
+empty() {}
+
+Param gain(0.5, min=0, max=1);
+History last(0), last2(0);
+Buffer samples("samples");
+Data scratch(1024, 2);
+Delay line(48000);
+
+phase = phasor(220);
+value = peek(samples, phase, interp="linear", index="phase");
+delayed = line.read(12000, interp="linear");
+line.write(value);
+for (i = 0; i < 4; i += 1) {
+    if (i > 2) { break; }
+    last += i;
+}
+r, theta = cartopol(in1, in2);
+out1 = shape(mix(value, delayed, 0.5), drive=2) * gain;
+out2 = in * twopi;

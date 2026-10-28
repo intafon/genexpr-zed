@@ -1,0 +1,4 @@
+{
+  "single-expression.genexpr": "Max accepts a standalone expression without a semicolon; the pinned grammar requires one.",
+  "require-no-semicolon.genexpr": "Max accepts require without a semicolon; the pinned grammar requires one."
+}

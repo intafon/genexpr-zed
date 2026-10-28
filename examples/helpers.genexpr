@@ -1,0 +1,4 @@
+// A reusable library. In a Max codebox: require("helpers"); out1 = saturate(in1);
+saturate(input, drive=1) {
+    return tanh(input * drive);
+}

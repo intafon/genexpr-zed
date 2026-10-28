@@ -1,0 +1,9 @@
+History foo(0);
+Data bar(234234, 3);
+
+// Complete codebox body: paste into a gen~ codebox to audition.
+// Required .genexpr libraries should contain reusable function definitions instead.
+Param frequency(220, min=0, max=20000);
+Param gain(0.1, min=0, max=1);
+
+out1 = cycle(frequency) * gain;

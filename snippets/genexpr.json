@@ -1,0 +1,62 @@
+{
+  "Function": {
+    "prefix": "fn",
+    "body": ["${1:process}(${2:input}) {", "    return ${0:input};", "}"],
+    "description": "Declare a GenExpr function before top-level statements"
+  },
+  "Parameter": {
+    "prefix": "param",
+    "body": "Param ${1:gain}(${2:1}, min=${3:0}, max=${4:1});$0",
+    "description": "Externally controlled parameter with bounds"
+  },
+  "History": {
+    "prefix": "history",
+    "body": "History ${1:previous}(${2:0});$0",
+    "description": "Persistent value with a one-sample delay"
+  },
+  "Buffer": {
+    "prefix": "buffer",
+    "body": "Buffer ${1:samples}(\"${2:bufferName}\");$0",
+    "description": "Reference a Max buffer~"
+  },
+  "Data": {
+    "prefix": "data",
+    "body": "Data ${1:storage}(${2:1024}, ${3:1});$0",
+    "description": "Local sample storage"
+  },
+  "Delay": {
+    "prefix": "delay",
+    "body": ["Delay ${1:line}(${2:48000});", "${3:delayed} = ${1:line}.read(${4:24000});", "${1:line}.write(${5:in1});", "$0"],
+    "description": "Delay line with a read and write"
+  },
+  "Require": {
+    "prefix": "require",
+    "body": "require(\"${1:library}\");$0",
+    "description": "Load function definitions from a .genexpr library"
+  },
+  "For loop": {
+    "prefix": "for",
+    "body": ["for (${1:i} = 0; ${1:i} < ${2:count}; ${1:i} += 1) {", "    $0", "}"],
+    "description": "Loop using += (GenExpr has no ++ operator)"
+  },
+  "While loop": {
+    "prefix": "while",
+    "body": ["while (${1:condition}) {", "    $0", "}"],
+    "description": "Loop while a condition holds"
+  },
+  "Conditional": {
+    "prefix": "ifelse",
+    "body": ["if (${1:condition}) {", "    ${2}", "} else {", "    $0", "}"],
+    "description": "Conditional branches"
+  },
+  "One-pole smoothing": {
+    "prefix": "smooth1",
+    "body": ["History ${1:state}(0);", "${1:state} = mix(${2:in1}, ${1:state}, ${3:0.99});", "out1 = ${1:state};$0"],
+    "description": "One-pole smoothing; larger feedback gives slower smoothing"
+  },
+  "Sine oscillator": {
+    "prefix": "sineosc",
+    "body": ["Param ${1:frequency}(${2:440}, min=0);", "out1 = cycle(${1:frequency});$0"],
+    "description": "Basic parameter-controlled gen~ sine oscillator"
+  }
+}

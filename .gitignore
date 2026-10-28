@@ -3,3 +3,5 @@
 grammars/
 
 /node_modules/
+/.cache/
+/server/dist/
